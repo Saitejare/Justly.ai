@@ -7,8 +7,10 @@ import json
 from django.contrib.auth.hashers import make_password, check_password
 
 from pymongo import MongoClient
+from django.conf import settings
 
-MONGO_URI = "mongodb://localhost:27017/"
+# Replace the hardcoded MONGO_URI with the provided Atlas URI
+MONGO_URI = "mongodb+srv://saiteja:saiteja5566@cluster0.hz8ebkg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(MONGO_URI)
 db = client['personal_notes_db']
 users_collection = db['users']
