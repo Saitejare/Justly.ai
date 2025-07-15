@@ -3,8 +3,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-insecure-secret-key')
-DEBUG = True
-ALLOWED_HOSTS = ['*']  # For production, set to your domain or Render/Heroku URL
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = ['your-app.onrender.com']  # For production, set to your domain or Render/Heroku URL
 
 INSTALLED_APPS = [
     'django.contrib.contenttypes',
@@ -15,6 +15,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this line
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]

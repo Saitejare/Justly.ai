@@ -1,3 +1,4 @@
 Django
-pymongo 
-gunicorn 
+pymongo
+gunicorn
+whitenoise 
