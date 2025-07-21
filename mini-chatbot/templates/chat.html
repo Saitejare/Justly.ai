@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#FF6B35">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="JustlyAI">
+    <title>JustlyAI - Self-Help Legal Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Mobile-first responsive design */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            height: 100vh;
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                display: grid;
+                grid-template-columns: 300px 1fr;
+                gap: 20px;
+                height: 100vh;
+            }
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            height: fit-content;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+        
+        .main-chat {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 40px);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        @media (min-width: 768px) {
+            .header {
+                padding: 20px;
+            }
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (min-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+                margin-bottom: 10px;
+            }
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        @media (min-width: 768px) {
+            .header p {
+                font-size: 1.1em;
+            }
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .emergency-banner {
+            background: linear-gradient(45deg, #ff4757, #ff3742);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        @media (min-width: 768px) {
+            .emergency-banner {
+                padding: 10px;
+                font-size: 1em;
+            }
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .message.user {
+            justify-content: flex-end;
+        }
+        
+        .message.bot {
+            justify-content: flex-start;
+        }
+        
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+        
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .message.bot .message-content {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message.bot .message-content h3 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .message.bot .message-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .message.bot .message-content li {
+            margin: 5px 0;
+        }
+        
+        .input-area {
+            padding: 20px;
+            background: white;
+            border-radius: 0 0 15px 15px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .message-input:focus {
+            border-color: #667eea;
+        }
+        
+        .send-btn, .voice-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .send-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .voice-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+        }
+        
+        .voice-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+        
+        .voice-btn.recording {
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            animation: pulse 1s infinite;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+        
+        .sidebar-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+        
+        .quick-action {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .quick-action:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .quick-action.emergency {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border-color: #ff4757;
+        }
+        
+        .quick-action.emergency:hover {
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+        
+        .self-help-features {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .self-help-features h4 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .self-help-features ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .self-help-features li {
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .self-help-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .case-sections {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .case-section {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        
+        .case-section:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .voice-status {
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .voice-status.recording {
+            color: #ff4757;
+            font-weight: bold;
+        }
+        
+        /* Mobile-specific optimizations */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .sidebar {
+                order: 2;
+                max-height: none;
+            }
+            
+            .main-chat {
+                order: 1;
+                height: 60vh;
+            }
+            
+            .message-content {
+                max-width: 85%;
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #0f1b2e 0%, #1a2a3a 100%);
+            }
+            
+            .chat-messages {
+                background: #1a1a1a;
+            }
+            
+            .message.bot .message-content {
+                background: #2a2a2a;
+                color: #e0e0e0;
+                border-color: #404040;
+            }
+            
+            .input-area {
+                background: #2a2a2a;
+                border-color: #404040;
+            }
+            
+            .message-input {
+                background: #1a1a1a;
+                color: #e0e0e0;
+                border-color: #404040;
+            }
+            
+            .quick-action {
+                background: #404040;
+                color: #e0e0e0;
+                border-color: #555;
+            }
+            
+            .quick-action:hover {
+                background: #555;
+            }
+        }
+        
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="self-help-features">
+                <h4>🛡️ Self-Help Legal Solutions</h4>
+                <ul>
+                    <li>Solve cases without lawyers</li>
+                    <li>Step-by-step guidance</li>
+                    <li>Evidence collection help</li>
+                    <li>Court preparation tips</li>
+                    <li>Settlement strategies</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>🚨 Emergency Help</h3>
+                <div class="quick-action emergency" onclick="getEmergencyContacts()">
+                    Emergency Contacts
+                </div>
+                <div class="quick-action emergency" onclick="sendMessage('I need immediate legal help')">
+                    Urgent Legal Help
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>💡 Self-Help Guides</h3>
+                <div class="quick-action" onclick="sendMessage('Help me with my case')">
+                    General Self-Help Guide
+                </div>
+                <div class="quick-action" onclick="sendMessage('How to collect evidence')">
+                    Evidence Collection
+                </div>
+                <div class="quick-action" onclick="sendMessage('How to settle my case')">
+                    Settlement Strategies
+                </div>
+                <div class="quick-action" onclick="sendMessage('How to prepare for court')">
+                    Court Preparation
+                </div>
+                <div class="quick-action" onclick="sendMessage('How to get bail')">
+                    Bail Application Guide
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>📋 Case Sections</h3>
+                <div class="case-sections" id="caseSections">
+                    <!-- Case sections will be loaded here -->
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>🎤 Voice Assistant</h3>
+                <div class="quick-action" onclick="toggleVoiceHelp()">
+                    Voice Commands Help
+                </div>
+                <div class="quick-action" onclick="clearChat()">
+                    Clear Chat
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chat -->
+        <div class="main-chat">
+            <div class="header">
+                <div class="language-selector">
+                    <button class="lang-btn active" onclick="setLanguage('english')">English</button>
+                    <button class="lang-btn" onclick="setLanguage('hindi')">हिंदी</button>
+                    <button class="lang-btn" onclick="setLanguage('telugu')">తెలుగు</button>
+                </div>
+                <h1>JustlyAI</h1>
+                <p>Your Free Self-Help Legal Assistant</p>
+                <div class="emergency-banner">
+                    🚨 Solve Your Legal Case Without a Lawyer - Free Guidance Available 24/7
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-content">
+                        <h3>🛡️ Welcome to JustlyAI - Self-Help Legal Solutions!</h3>
+                        <p>I'm here to help you solve your legal case <strong>without consulting a lawyer</strong>. I provide:</p>
+                        <ul>
+                            <li>📋 Step-by-step case resolution guides</li>
+                            <li>📸 Evidence collection strategies</li>
+                            <li>🤝 Settlement and compromise methods</li>
+                            <li>⚖️ Court preparation and presentation tips</li>
+                            <li>🔓 Bail application guidance</li>
+                            <li>🚨 Emergency legal help</li>
+                        </ul>
+                        <p><strong>Ask me about your specific case or use the quick actions on the left!</strong></p>
+                        <p><strong>Supported Languages:</strong> English, हिंदी (Hindi), తెలుగు (Telugu)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-container">
+                    <input type="text" id="messageInput" class="message-input" placeholder="Ask about your legal case or use voice..." onkeypress="handleKeyPress(event)">
+                    <button class="send-btn" onclick="sendMessage()">
+                        📤 Send
+                    </button>
+                    <button class="voice-btn" id="voiceBtn" onclick="toggleVoiceRecording()">
+                        🎤 Voice
+                    </button>
+                </div>
+                <div class="voice-status" id="voiceStatus">
+                    Press and hold the voice button to speak
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isRecording = false;
+        let recognition = null;
+        let currentLanguage = 'english';
+
+        // Initialize speech recognition
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = function() {
+                isRecording = true;
+                document.getElementById('voiceBtn').classList.add('recording');
+                document.getElementById('voiceStatus').textContent = 'Listening... Speak now!';
+                document.getElementById('voiceStatus').classList.add('recording');
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('messageInput').value = transcript;
+                sendMessage();
+            };
+
+            recognition.onend = function() {
+                isRecording = false;
+                document.getElementById('voiceBtn').classList.remove('recording');
+                document.getElementById('voiceStatus').textContent = 'Press and hold the voice button to speak';
+                document.getElementById('voiceStatus').classList.remove('recording');
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+                isRecording = false;
+                document.getElementById('voiceBtn').classList.remove('recording');
+                document.getElementById('voiceStatus').textContent = 'Voice recognition error. Please try again.';
+                document.getElementById('voiceStatus').classList.remove('recording');
+            };
+        }
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update speech recognition language
+            if (recognition) {
+                switch(lang) {
+                    case 'hindi':
+                        recognition.lang = 'hi-IN';
+                        break;
+                    case 'telugu':
+                        recognition.lang = 'te-IN';
+                        break;
+                    default:
+                        recognition.lang = 'en-US';
+                }
+            }
+            
+            // Send language change message
+            sendMessage(`Change language to ${lang}`);
+        }
+
+        function toggleVoiceRecording() {
+            if (!recognition) {
+                alert('Speech recognition is not supported in your browser.');
+                return;
+            }
+
+            if (isRecording) {
+                recognition.stop();
+            } else {
+                recognition.start();
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage(message = null) {
+            const input = document.getElementById('messageInput');
+            const messageText = message || input.value.trim();
+            
+            if (!messageText) return;
+
+            // Add user message
+            addMessage(messageText, 'user');
+            input.value = '';
+
+            // Show loading
+            showLoading();
+
+            // Send to server
+            fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    message: messageText,
+                    language: currentLanguage
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                if (data.error) {
+                    addMessage('Sorry, there was an error processing your request.', 'bot');
+                } else {
+                    addMessage(data.response, 'bot');
+                }
+            })
+            .catch(error => {
+                hideLoading();
+                addMessage('Sorry, there was an error connecting to the server.', 'bot');
+                console.error('Error:', error);
+            });
+        }
+
+        function addMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            if (sender === 'bot') {
+                // Convert markdown-like formatting to HTML
+                contentDiv.innerHTML = formatMessage(message);
+            } else {
+                contentDiv.textContent = message;
+            }
+            
+            messageDiv.appendChild(contentDiv);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function formatMessage(message) {
+            // Convert markdown-like formatting to HTML
+            return message
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>')
+                .replace(/📋|📸|🤝|⚖️|🔓|🚨|💡|🎯/g, '<span style="font-size: 1.2em;">$&</span>');
+        }
+
+        function showLoading() {
+            const loading = document.createElement('div');
+            loading.className = 'message bot loading show';
+            loading.innerHTML = `
+                <div class="message-content">
+                    <div class="spinner"></div>
+                    <div>Analyzing your case and preparing self-help solutions...</div>
+                </div>
+            `;
+            document.getElementById('chatMessages').appendChild(loading);
+            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+        }
+
+        function hideLoading() {
+            const loading = document.querySelector('.loading');
+            if (loading) {
+                loading.remove();
+            }
+        }
+
+        function getEmergencyContacts() {
+            fetch('/api/emergency-contacts')
+                .then(response => response.json())
+                .then(data => {
+                    let contacts = '🚨 **Emergency Contacts:**\n\n';
+                    for (const [service, number] of Object.entries(data)) {
+                        const serviceName = service.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+                        contacts += `📞 **${serviceName}**: ${number}\n`;
+                    }
+                    contacts += '\n💡 **Call these numbers immediately if you need urgent help!**';
+                    addMessage(contacts, 'bot');
+                })
+                .catch(error => {
+                    addMessage('Sorry, could not load emergency contacts.', 'bot');
+                });
+        }
+
+        function toggleVoiceHelp() {
+            fetch('/api/voice-commands')
+                .then(response => response.json())
+                .then(data => {
+                    addMessage(data.commands, 'bot');
+                })
+                .catch(error => {
+                    addMessage('Sorry, could not load voice commands.', 'bot');
+                });
+        }
+
+        function clearChat() {
+            fetch('/api/clear-chat', { method: 'POST' })
+                .then(() => {
+                    document.getElementById('chatMessages').innerHTML = `
+                        <div class="message bot">
+                            <div class="message-content">
+                                <h3>🛡️ Chat Cleared!</h3>
+                                <p>How can I help you with your legal case today?</p>
+                            </div>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error clearing chat:', error);
+                });
+        }
+
+        // Load case sections on page load
+        window.onload = function() {
+            fetch('/api/case-sections')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('caseSections');
+                    data.forEach(section => {
+                        const div = document.createElement('div');
+                        div.className = 'case-section';
+                        div.textContent = `${section.section} - ${section.name}`;
+                        div.onclick = () => sendMessage(`Tell me about Section ${section.section}`);
+                        container.appendChild(div);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading case sections:', error);
+                });
+        };
+    </script>
+</body>
+</html> 
