@@ -1,0 +1,78 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #f7f7f8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem 0.5rem 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  z-index: 100;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  border-bottom: 1px solid #ececec;
+}
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #fffbe6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  object-fit: contain;
+}
+.brand-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+.brand-tagline {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #666;
+  margin-left: 0.5rem;
+  letter-spacing: 0.1px;
+}
+.language-select-wrapper {
+  margin-right: 1rem;
+}
+.language-select {
+  background: #fff;
+  color: #222;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  font-size: 1rem;
+  padding: 4px 16px 4px 8px;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  transition: border 0.2s;
+}
+.language-select:focus {
+  border: 1.5px solid #19c37d;
+}
+.language-toggle { display: none; }
+.new-chat-btn {
+  margin-left: 16px;
+  padding: 6px 16px;
+  background: #19c37d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.new-chat-btn:hover {
+  background: #15a367;
+} 

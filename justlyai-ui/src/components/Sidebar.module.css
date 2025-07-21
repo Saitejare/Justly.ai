@@ -1,0 +1,134 @@
+.sidebar-container {
+  width: 260px;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.sidebar-menu-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  background: #111;
+  border-bottom: 1px solid #222;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.icon-btn:hover {
+  background: #222;
+}
+
+.sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background: #000;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24px 0 12px 0;
+}
+
+.sidebar-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.sidebar-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  text-align: left;
+  padding: 10px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+}
+
+.sidebar-btn:hover {
+  background: #222;
+}
+
+.sidebar-section-title {
+  margin: 0 0 8px 24px;
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.sidebar-chats.scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 16px;
+}
+
+.sidebar-chat {
+  padding: 8px 24px;
+  font-size: 15px;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.sidebar-chat:hover {
+  background: #181818;
+}
+
+.sidebar-chat.empty {
+  color: #666;
+  font-style: italic;
+}
+
+.sidebar-chat.active {
+  background: #f0f4ff;
+  font-weight: 600;
+  border-right: 3px solid #2563eb;
+}
+
+.sidebar-dot {
+  width: 8px;
+  height: 8px;
+  background: #2563eb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+/* Custom Scrollbar */
+.sidebar-container,
+.sidebar-chats.scrollable {
+  scrollbar-width: thin;
+  scrollbar-color: #333 #1A1B1E;
+}
+.sidebar-container::-webkit-scrollbar,
+.sidebar-chats.scrollable::-webkit-scrollbar {
+  width: 8px;
+  background: #1A1B1E;
+}
+.sidebar-container::-webkit-scrollbar-thumb,
+.sidebar-chats.scrollable::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+} 

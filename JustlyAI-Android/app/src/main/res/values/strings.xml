@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JustlyAI</string>
+    
+    <!-- Main Activity -->
+    <string name="app_subtitle">Free Legal Help for Every Indian</string>
+    <string name="emergency_banner_text">🚨 Emergency? Call 100 for Police, 1091 for Women Helpline</string>
+    
+    <!-- Feature Buttons -->
+    <string name="btn_chat">Chat with JustlyAI</string>
+    <string name="btn_voice">Voice Assistant</string>
+    <string name="btn_legal_topics">Legal Topics</string>
+    <string name="btn_emergency">Emergency Contacts</string>
+    <string name="btn_quick_tips">Quick Legal Tips</string>
+    
+    <!-- Chat Activity -->
+    <string name="chat_title">Chat with JustlyAI</string>
+    <string name="hint_message">Type your legal question...</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_voice_input">Voice</string>
+    
+    <!-- Voice Activity -->
+    <string name="voice_title">Voice Assistant</string>
+    <string name="voice_status_ready">Ready</string>
+    <string name="voice_status_listening">Listening...</string>
+    <string name="voice_status_processing">Processing...</string>
+    <string name="voice_status_error">Error occurred</string>
+    <string name="voice_prompt">Speak your legal question...</string>
+    
+    <!-- Quick Action Buttons -->
+    <string name="btn_fundamental_rights">Fundamental Rights</string>
+    <string name="btn_labor_laws">Labor Laws</string>
+    <string name="btn_consumer_rights">Consumer Rights</string>
+    <string name="btn_emergency_contacts">Emergency</string>
+    <string name="btn_voice_help">Voice Help</string>
+    
+    <!-- Legal Topics -->
+    <string name="legal_topics_title">Legal Topics</string>
+    <string name="topic_constitutional_rights">Constitutional Rights (Fundamental Rights)</string>
+    <string name="topic_labor_laws">Labor Laws (Minimum Wages, Working Hours)</string>
+    <string name="topic_consumer_rights">Consumer Rights (Product Complaints, Refunds)</string>
+    <string name="topic_property_laws">Property Laws (Land Rights, Tenancy)</string>
+    <string name="topic_family_laws">Family Laws (Marriage, Divorce, Inheritance)</string>
+    <string name="topic_criminal_laws">Criminal Laws (Arrest Procedures, Bail)</string>
+    <string name="topic_government_schemes">Government Schemes (Legal Aid, Welfare Programs)</string>
+    <string name="topic_business_laws">Business Laws (Registration, GST, Compliance)</string>
+    
+    <!-- Emergency Contacts -->
+    <string name="emergency_title">Emergency Contacts</string>
+    <string name="emergency_police">Police Emergency</string>
+    <string name="emergency_women_helpline">Women Helpline</string>
+    <string name="emergency_child_helpline">Child Helpline</string>
+    <string name="emergency_legal_aid">National Legal Services Authority</string>
+    <string name="emergency_police_number">100</string>
+    <string name="emergency_women_number">1091</string>
+    <string name="emergency_child_number">1098</string>
+    <string name="emergency_legal_number">1800-11-0001</string>
+    
+    <!-- Voice Commands -->
+    <string name="voice_command_repeat">repeat</string>
+    <string name="voice_command_summarize">summarize</string>
+    <string name="voice_command_clear">clear chat</string>
+    <string name="voice_command_help">voice help</string>
+    
+    <!-- Messages -->
+    <string name="msg_welcome">Hello! I\'m JustlyAI, your free legal assistant. How can I help you today?</string>
+    <string name="msg_processing_error">I\'m sorry, I couldn\'t process your request. Please try again or check your internet connection.</string>
+    <string name="msg_voice_error">I\'m sorry, I couldn\'t process your voice command. Please try again.</string>
+    <string name="msg_no_speech">No speech detected</string>
+    <string name="msg_speech_timeout">Speech timeout</string>
+    <string name="msg_speech_error">Speech recognition error</string>
+    <string name="msg_permission_required">Microphone permission required</string>
+    <string name="msg_permission_granted">Audio permission granted</string>
+    <string name="msg_permission_denied">Audio permission required for voice features</string>
+    <string name="msg_language_not_supported">Language not supported</string>
+    <string name="msg_tts_init_failed">Text-to-speech initialization failed</string>
+    
+    <!-- Quick Legal Tips -->
+    <string name="quick_tips_title">Quick Legal Tips</string>
+    <string name="quick_tips_fundamental">📋 Fundamental Rights:\n• Right to Equality (Article 14-18)\n• Right to Freedom (Article 19-22)\n• Right against Exploitation (Article 23-24)\n• Right to Freedom of Religion (Article 25-28)\n• Right to Education (Article 21A)</string>
+    <string name="quick_tips_labor">💼 Labor Rights:\n• Minimum wage varies by state\n• 8-hour workday maximum\n• Overtime pay for extra hours\n• Paid leave and holidays\n• Safe working conditions</string>
+    <string name="quick_tips_consumer">🛒 Consumer Rights:\n• Right to safety\n• Right to information\n• Right to choose\n• Right to be heard\n• Right to redressal</string>
+    <string name="quick_tips_emergency">🚨 Emergency Contacts:\n• Police: 100\n• Women Helpline: 1091\n• Child Helpline: 1098\n• Legal Aid: 1800-11-0001</string>
+    
+    <!-- Voice Help -->
+    <string name="voice_help_title">Voice Commands You Can Use:</string>
+    <string name="voice_help_general">📋 General Commands:\n• "Repeat" - I\'ll repeat my last response\n• "Summarize" - I\'ll give a quick summary\n• "Clear chat" - Start a new conversation\n• "Voice help" - Show these voice commands</string>
+    <string name="voice_help_legal">⚖️ Legal Queries:\n• "What are my fundamental rights?"\n• "Tell me about minimum wage law"\n• "How to file consumer complaint?"\n• "Emergency contacts"\n• "Legal topics"\n• "Quick legal tips"</string>
+    <string name="voice_help_tips">💡 Voice Tips:\n• Speak clearly and slowly\n• Use simple language\n• Ask one question at a time\n• Wait for my response before asking again</string>
+    
+    <!-- Content Descriptions -->
+    <string name="cd_app_logo">JustlyAI Logo</string>
+    <string name="cd_emergency">Emergency</string>
+    <string name="cd_chat">Chat</string>
+    <string name="cd_voice">Voice</string>
+    <string name="cd_legal_topics">Legal Topics</string>
+    <string name="cd_emergency_contacts">Emergency Contacts</string>
+    <string name="cd_quick_tips">Quick Tips</string>
+    <string name="cd_mic">Microphone</string>
+    <string name="cd_mic_off">Microphone Off</string>
+    <string name="cd_send">Send Message</string>
+    <string name="cd_voice_input">Voice Input</string>
+</resources> 

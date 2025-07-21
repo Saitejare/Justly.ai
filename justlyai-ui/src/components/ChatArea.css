@@ -1,0 +1,48 @@
+/* Only vertical padding for header/footer; sidebar is handled by layout wrapper */
+.chat-area {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 96px 0 96px 0;
+  min-height: 100vh;
+  background: #fff;
+  transition: padding 0.2s;
+}
+.welcome {
+  text-align: center;
+  margin: 2rem 0 1.5rem 0;
+  color: #333;
+  font-size: 1.15rem;
+}
+.welcome .try {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #1976d2;
+}
+.welcome ul {
+  list-style: disc;
+  margin: 0.5rem auto 0 auto;
+  padding-left: 1.5rem;
+  display: inline-block;
+  text-align: left;
+}
+.typing {
+  color: #1976d2;
+  font-style: italic;
+  margin: 0.5rem 0 0.5rem 0.5rem;
+  font-size: 1.05rem;
+}
+.dots {
+  display: inline-block;
+  animation: blink 1.2s infinite steps(3);
+}
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+@media (max-width: 900px) {
+  .chat-area {
+    padding: 80px 0 80px 0;
+  }
+} 

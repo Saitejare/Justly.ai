@@ -1,0 +1,33 @@
+.quick-actions {
+  position: fixed;
+  left: 260px;
+  right: 0;
+  bottom: 64px;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  z-index: 102;
+}
+.quick-actions button {
+  background: #10a37f;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(16,163,127,0.08);
+  transition: background 0.2s;
+}
+.quick-actions button:hover {
+  background: #1976d2;
+}
+@media (max-width: 900px) {
+  .quick-actions {
+    left: 0;
+    bottom: 64px;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+} 
